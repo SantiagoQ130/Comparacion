@@ -1,0 +1,42 @@
+def comparar_archivos(archivo_original, archivo_comparar):
+    """
+    Compara dos archivos línea por línea y muestra las diferencias.
+    :param archivo_original: Ruta del archivo original.
+    :param archivo_comparar: Ruta del archivo a comparar.
+    """
+    try:
+        with open(archivo_original, 'r') as original, open(archivo_comparar, 'r') as comparar:
+            lineas_original = original.readlines()
+            lineas_comparar = comparar.readlines()
+
+            diferencias = 0
+            lineas_diferentes = []
+
+            # Comparar línea por línea
+            for num_linea, (linea_orig, linea_comp) in enumerate(zip(lineas_original, lineas_comparar), start=1):
+                if linea_orig != linea_comp:
+                    diferencias += 1
+                    lineas_diferentes.append(num_linea)
+                    print(f"Diferencia en línea {num_linea}:")
+                    print(f"  Original: {linea_orig.strip()}")
+                    print(f"  Comparar: {linea_comp.strip()}")
+                    print("-" * 40)
+
+            # Verificar si un archivo tiene más líneas que el otro
+            if len(lineas_original) != len(lineas_comparar):
+                lineas_extra = abs(len(lineas_original) - len(lineas_comparar))
+                diferencias += lineas_extra
+                print(f"Advertencia: Uno de los archivos tiene {lineas_extra} líneas adicionales.")
+
+            # Resumen de la comparación
+            if diferencias == 0:
+                print("Los archivos son idénticos.")
+            else:
+                print(f"Total de diferencias encontradas: {diferencias}")
+                print(f"Líneas con diferencias: {lineas_diferentes}")
+
+    except FileNotFoundError as e:
+        print(f"Error: No se pudo abrir uno de los archivos. Detalles: {e}")
+
+# Llamar a la función para comparar los archivos
+comparar_archivos('original.txt', 'copia.txt')
