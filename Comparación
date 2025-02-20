@@ -1,11 +1,11 @@
-def comparar_archivos(archivo_original, archivo_comparar):
+def comparar_archivos(caracteres, caracteresrecibidos):
     """
     Compara dos archivos línea por línea y muestra las diferencias.
     :param archivo_original: Ruta del archivo original.
     :param archivo_comparar: Ruta del archivo a comparar.
     """
     try:
-        with open(archivo_original, 'r') as original, open(archivo_comparar, 'r') as comparar:
+        with open(caracteres, 'r') as original, open(caracteresrecibidos, 'r') as comparar:
             lineas_original = original.readlines()
             lineas_comparar = comparar.readlines()
 
@@ -39,4 +39,4 @@ def comparar_archivos(archivo_original, archivo_comparar):
         print(f"Error: No se pudo abrir uno de los archivos. Detalles: {e}")
 
 # Llamar a la función para comparar los archivos
-comparar_archivos('original.txt', 'copia.txt')
+comparar_archivos('caracteres.txt', 'caracteresrecibidos.txt')
